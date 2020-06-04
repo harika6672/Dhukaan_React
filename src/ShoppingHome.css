@@ -1,0 +1,11 @@
+.col-md-8{
+   position: relative;
+   margin-left: 350px;
+}
+@media (max-width: 768px) { 
+    .col-12{
+        position: relative;
+        margin-left: 0;
+    }
+}
+
