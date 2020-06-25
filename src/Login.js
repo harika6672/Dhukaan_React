@@ -3,7 +3,10 @@ import Navigation from './Navigation';
 import LoginForm from './LoginForm';
 import './Login.css';
 import axios from 'axios';
+import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
+import { fetchIdAction } from './Actions/action';
+import { bindActionCreators } from 'redux';
 
 
 class Login extends Component{
@@ -16,7 +19,8 @@ class Login extends Component{
              password:'',
              status:false,
              login:false,
-             showPassword:false
+             showPassword:false,
+             login_id:0
         }
     }
     changeHandler=(event)=>{
@@ -43,9 +47,14 @@ class Login extends Component{
         for(let i of  registeredUsers){
            count++;
            if(i.email === this.state.email && i.password === this.state.password){
+               this.setState({
+                   login_id:i.id
+               })
+            this.props.fetchIdAction(i.id);
               this.setState({
-                  login:true,     
+                  login:true,
              })
+             
             break;
            }
            if(count == usersCount){
@@ -60,19 +69,28 @@ class Login extends Component{
     render(){
         if(this.state.login){
             return <Redirect to="/shopping-home"/>
+            // return <Redirect to={{
+            //     pathname: '/shopping-home',
+            //     state: { login_id: this.state.login_id}
+            // }} />
         }
         
         return(
             <div>
-                <Navigation/>
+                <Navigation />
                 <LoginForm login={this.login} changeHandler={this.changeHandler} user={this.state} checkboxhandler={this.checkBoxHandler}/>
             </div>
             
             
         )
+
     }
+ 
     
 }
+const mapDispatchToProps = dispatch => ({
+    fetchIdAction: bindActionCreators(fetchIdAction, dispatch)
+  })
 
-export default Login;
+export default connect(null,mapDispatchToProps)(Login);
 

@@ -20,10 +20,7 @@ const Navigation=()=>{
                     <Link to="/register" className="nav-link">Register</Link>
                 </li>
                 </ul>
-                <form className="form-inline my-2 my-lg-0">
-                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                <button className="btn btn-outline-light" type="submit">Search</button>
-                </form>
+                
             </div>
         </nav>
     )

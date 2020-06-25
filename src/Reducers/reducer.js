@@ -7,7 +7,8 @@ const initialState = {
     error: null,
     selectedProducts:[],
     cartCount:0,
-    likedProducts:[]
+    likedProducts:[],
+    loginId:0
 }
 
 export function productsReducer(state = initialState, action) {
@@ -31,25 +32,28 @@ export function productsReducer(state = initialState, action) {
                 error: action.error
             }
         case FETCH_SELECTED_PRODUCTS:
-          for(let i=0; i < state.products.length; i++){
-            if(state.products[i].product_id === action.id){
-               return{
-                 ...state,
-                 selectedProducts:state.selectedProducts.concat(state.products[i]),
-                 cartCount:state.cartCount+1
-               }
-            }    
-        }
+          return{
+            ...state,
+            pending: false,
+            selectedProducts: action.products
+            // selectedProducts:state.selectedProducts.concat(state.products[i]),
+            // cartCount:state.cartCount+1
+          }
+
+          case 'CART_COUNT':
+            return{
+              ...state,
+              cartCount:state.selectedProducts.length
+            }
+              
+    
         case FETCH_LIKED_PRODUCTS:
-          for(let i=0; i < state.products.length; i++){
-            if(state.products[i].product_id === action.id){
-               return{
-                 ...state,
-                 likedProducts:state.likedProducts.concat(state.products[i]),
-                 
-               }
-            }    
-        }
+          return{
+            ...state,
+            pending: false,
+            likedProducts: action.products
+          }
+         
         case CLEAR_ORDERED_LIKED_PRODUCTS:
             const likedProducts=state.likedProducts.filter((item, index)=>{
               if(index !== action.id){
@@ -60,6 +64,11 @@ export function productsReducer(state = initialState, action) {
               ...state,
               likedProducts:likedProducts
               }
+        case 'FETCH_ID':
+          return{
+            ...state,
+            loginId:action.id
+          }
             
         default: 
             return state;
@@ -67,19 +76,25 @@ export function productsReducer(state = initialState, action) {
 }
 
 export const getProducts = state => {
+  console.log(state.products)
   return state.products;
 }
 export const getProductsPending = state => state.pending;
 export const getProductsError = state => state.error;
 export const getSelectedProducts=state=>{
-  
+  // console.log(state.selectedProducts)
+  // console.log(state.selectedProducts.length)
   return state.selectedProducts;
 }
 export const getLikedProducts=state=>{
-  console.log(state.likedProducts)
+  // console.log(state.likedProducts)
   return state.likedProducts;
 }
 export const getCount=state=>{
- 
-  return state.cartCount;
+  // console.log(state.selectedProducts.length)
+  return state.selectedProducts.length;
+}
+export const getLoginId=state=>{
+//  console.log(state.loginId)
+  return state.loginId;
 }

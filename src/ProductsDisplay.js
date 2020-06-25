@@ -1,11 +1,14 @@
 import React from 'react';
 import { productsReducer } from './Reducers/reducer';
 
+const products={
+    "margin-bottom":"20px"
+} 
 const ProductsDisplay=(props)=>{
     const {product}=props;
-    
+    console.log(product);
     return(
-        <div className="col-12 col-md-4" key={product.product_id}>
+        <div className="col-12 col-md-4" key={product.product_id} style={products}>
             <div className="card">
                 <a className="img-card" href="#">
                 <img src="" alt="img"/>

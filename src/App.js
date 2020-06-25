@@ -41,15 +41,11 @@ function App() {
         <Route path="/category">
           <Category/>
         </Route>
-        <Route path="/orders">
-          <Orders/>
-        </Route>
-        <Route path="/profile">
+        
+        <Route path="/profile/:id">
           <Profile/>
         </Route>
-        <Route path="/wishlist">
-          <WishList/>
-        </Route>
+        <Route path="/wishlist/:id" exact render = {props => <WishList {...props}  /> } />
         <Route path="/logout">
           <Login/>
         </Route>
@@ -59,10 +55,9 @@ function App() {
         <Route path="/addProduct">
           <AddProduct/>
         </Route>
-        <Route path="/orders">
-          <Orders/>
-        </Route>
+        
         <Route path="/staples/:id" exact render = {props => <Staples {...props}  /> } />
+        <Route path="/orders/:id" exact render={(props)=><Orders {...props}/>}/>
         <Route path="/">
           <Login/>
         </Route>

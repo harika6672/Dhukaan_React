@@ -28,16 +28,17 @@ export function fetchProductsError(error) {
     }
 }
 
-export function fetchSelectedProducts(id){
+export function fetchSelectedProducts(products){
     return{
         type:FETCH_SELECTED_PRODUCTS,
-        id:id
+        products: products.data
     }
 }
-export function fetchLikedProducts(id){
+export function fetchLikedProducts(products){
+    console.log(products.data)
     return{
         type:FETCH_LIKED_PRODUCTS,
-        id:id
+        products: products.data
     }
 }
 export function clearOrderedLikedItem(id){
@@ -46,4 +47,16 @@ export function clearOrderedLikedItem(id){
         id:id
     }
 }
-
+export function fetchIdAction(id){
+    console.log(id);
+    return{
+        type:'FETCH_ID',
+        id:id
+    }
+}
+export function fetchCartCount(){
+    return{
+        type:'CART_COUNT',
+        
+    }
+}

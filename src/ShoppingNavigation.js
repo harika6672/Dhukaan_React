@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getCount } from '../src/Reducers/reducer'
+import { getCount, getLoginId } from '../src/Reducers/reducer';
+import { fetchSelectedProductsAction } from './Actions/fetchProducts';
+import { fetchCartCount } from './Actions/action'
 import axios from 'axios';
 import './ShoppingNav.css';
 
@@ -26,8 +28,13 @@ class ShoppingNavigation extends Component{
             })
           }
         })
+        console.log(this.props.login_id);
+        this.props.fetchSelectedProductsAction(this.props.login_id);
+        
     }
+   
     render(){
+        this.props.fetchCartCount();
         const categories=this.state.categories;
         return(
             <div className="nav-side-menu">
@@ -52,18 +59,18 @@ class ShoppingNavigation extends Component{
                               })}
                             </ul>
                             <li>
-                                <Link to="/orders">
+                            <Link to={'/orders/'+`:${this.props.login_id}`}> 
                                 <i className="fa fa-shopping-basket fa-lg"></i>My Orders
                                 <span className='badge badge-warning' id='lblCartCount'>{this.props.cartCount}</span>
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/wishlist">
+                                <Link to={'/wishlist/'+`:${this.props.login_id}`}>
                                 <i className="fa fa-heart-o fa-lg"></i>Wish List
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/profile">
+                            <Link to={'/profile/'+`:${this.props.login_id}`}>
                                 <i className="fa fa-user-circle fa-lg"></i>Profile
                                 </Link>
                             </li>
@@ -80,6 +87,12 @@ class ShoppingNavigation extends Component{
     }
 }
 const mapStateToProps=(state)=>({
-    cartCount:getCount(state)
+    cartCount:getCount(state),
+    login_id:getLoginId(state)
 })
-export default connect(mapStateToProps)(ShoppingNavigation);
+
+const mapDispatchToProps={
+    fetchSelectedProductsAction,
+    fetchCartCount
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ShoppingNavigation);
