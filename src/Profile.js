@@ -21,7 +21,7 @@ class Profile extends Component{
     }
     
     componentDidMount(){
-        axios.get(`http://localhost/DhukaanPHP/get_userprofile.php/${this.props.login_id}`)
+        axios.get(`http://localhost/DhukaanPHP/get_userprofile.php/${localStorage.getItem('loginid')}`)
         .then(res => {  
          const user=res.data[0];
         
@@ -44,15 +44,16 @@ class Profile extends Component{
         return(
              
               
-            
+            <>
+            <ShoppingNavigation/>
                 <div className="row">
-                    <div className="col-md-4">
-                        <ShoppingNavigation/>
-                    </div>
-                    <div className="col-md-8">
+                  
+                        
+                    
+                    <div className="col-12 col-md-8">
                     <form>
                         <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-12">
                         <div className="profile-img">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
                             <div className="file btn btn-lg btn-primary">
@@ -61,7 +62,7 @@ class Profile extends Component{
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 col-8 offset-4">
                         <div className="profile-head">
                                     <h5>
                                        {name}
@@ -138,7 +139,7 @@ class Profile extends Component{
                         </div>
                         </div>
                     </div>
-                    <div className="col-md-2">
+                    <div className="col-md-2 col-8 offset-4">
                         <input type="submit" className="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
                     </div>
                 </div>
@@ -150,7 +151,7 @@ class Profile extends Component{
                     
                 </div>
                    
-          
+          </>
             
         )
     }

@@ -1,137 +1,203 @@
-.nav-side-menu {
-    overflow: auto;
-    font-family: verdana;
-    font-size: 12px;
-    font-weight: 200;
-    background-color:#0000FF;
-    position: fixed;
-    top: 0px;
-    width: 300px;
-    height: 100%;
-    color: #e1ffff;
+ul#header-list  li{
+  display:inline;
+}
+ul#products_list li{
+  display:inline;
+}
+ul#header-list  li a{
+  color:white
+}
+button#menubtn{
+  background-color: white !important;
+  border-color: white;
+}
+@media screen and (min-width: 480px) {
+  #menu{
+    display:none;
   }
-  .nav-side-menu .brand {
-    background-color:#0000FF;
-    line-height: 50px;
-    display: block;
-    text-align: center;
-    font-size: 14px;
-    font-style: italic;
+}
+@media screen and (max-width: 480px) {
+  ul#header-list  li{
+    display:inline;
   }
-  .nav-side-menu .toggle-btn {
+}
+@media screen and (max-width: 480px) {
+  ul#header-list {
+    padding: 2px;
+  }
+}
+@media screen and (max-width: 480px) {
+  ul#header-list  li a{
+    padding: 4px;
+    color:white
+  }
+}
+@media screen and (max-width: 480px) {
+  ul#header-list  li a:hover{
+    background-color: white;
+    text-decoration:none;
+  }
+}
+@media screen and (max-width: 480px) {
+  .navbar-brand{
     display: none;
   }
-  .nav-side-menu ul,
-  .nav-side-menu li {
-    list-style: none;
-    padding: 0px;
-    margin: 0px;
-    line-height: 35px;
-    cursor: pointer;
-    /*    
-      .collapsed{
-         .arrow:before{
-                   font-family: FontAwesome;
-                   content: "\f053";
-                   display: inline-block;
-                   padding-left:10px;
-                   padding-right: 10px;
-                   vertical-align: middle;
-                   float:right;
-              }
-       }
-  */
+}
+@media screen and (max-width: 480px) {
+  #side-menu{
+    display:none
   }
-  .nav-side-menu ul :not(collapsed) .arrow:before,
-  .nav-side-menu li :not(collapsed) .arrow:before {
-    font-family: FontAwesome;
-    content: "\f078";
-    display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
-    vertical-align: middle;
-    float: right;
+}
+@media  (min-width:480px) and (max-width:2040px)  {
+  #side-menu-mobile{
+    display:none
   }
-  .nav-side-menu ul .active,
-  .nav-side-menu li .active {
-    border-left: 3px solid white;
-    background-color: #0000FF;
-  }
- 
-  .nav-side-menu li {
-    padding-left: 0px;
-    border-left: 3px solid#0000FF;
-    border-bottom: 1px solid#0000FF;
-  }
-  .nav-side-menu li a {
-    text-decoration: none;
-    color: #e1ffff;
-  }
-  .nav-side-menu li a i {
-    padding-left: 10px;
-    width: 20px;
-    padding-right: 20px;
-  }
-  .nav-side-menu li:hover {
-    border-left: 3px solid white;
-    background-color: #4f5b69;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    transition: all 1s ease;
-  }
-  @media (max-width: 767px) {
-    .nav-side-menu {
-      position: relative;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .nav-side-menu .toggle-btn {
-      display: block;
-      cursor: pointer;
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      z-index: 10 !important;
-      padding: 3px;
-      background-color: #ffffff;
-      color: #000;
-      width: 40px;
-      text-align: center;
-    }
-    .brand {
-      text-align: left !important;
-      font-size: 22px;
-      padding-left: 20px;
-      line-height: 50px !important;
-    }
-  }
-  @media (min-width: 767px) {
-    .nav-side-menu .menu-list .menu-content {
-      display: block;
-    }
-  }
-  .badge {
-   
-    -webkit-border-radius: 9px;
-    -moz-border-radius: 9px;
-    border-radius: 9px;
-    position: relative;
-    top:10px;
-  }
-  
- 
-  #lblCartCount {
-      font-size: 15px;
-      background: white;
-      color:blue;
-      padding: 0 10px;
-      vertical-align: top;
-      margin-left: 10px; 
-  }
-  body {
-    margin: 0px;
-    padding: 0px;
-  }
-  
+}
+.badge badge-warning{
+	position: relative;
+	top:-10px
+}
+#dropdownMenuButton{
+  margin-top: -10px;
+}
+
+.dropdown-item a{
+	color:black !important
+}
+
+.dropdown-item a:hover {
+	color:grey !important;
+	text-decoration: none;
+}
+.dropdown-item i{
+	margin-right: 10px;
+}
+
+.dropdown-menu{
+	width: 0px;
+	position: relative;
+	left:200px;
+	margin-top:30px;
+
+}
+/* .dropdown{
+	position: absolute;
+	left:200px;
+	top:20px
+} */
+@media screen and (max-width: 480px) {
+	.dropdown-menu{
+		width: 0px;
+		position: fixed;
+		left:200px;
+		top:50px;
+		
+	}
+}
+.bg-primary {
+    background-color: #0000FF!important;
+}
+
+span#shadowbox {
+	position: absolute;
+	transition: ease-in-out .5s;
+}
+span#shadowbox.visible {
+	transition: ease-in-out .5s;
+	/* background: rgba(0,0,0,.7); */
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+nav {
+	position: fixed;
+  top: 0;
+	bottom: 0;
+	z-index: 2; 
+}
+nav button {
+  position: absolute;
+	background:white;
+	width: 48px;
+  height: 48px;
+  margin-top: 20px;
+	padding: 8px;
+	left: 0px;
+	cursor: pointer;
+	border:none;
+	border-radius: 5px;
+	transition: ease-in-out .3s;
+}
+nav button div {
+	background:	#696969;
+	width: 100%;
+	height: 5px;
+	margin: 5px 0 0 ;
+	float: left;
+	border-radius: 9px;
+	transition: ease-in-out .12s;
+}
+nav button div:nth-child(3) {
+	margin: -5px 0 0 0;
+}
+nav button div:first-child {
+	margin: 0;
+}
+
+nav button.navOpen {
+	left: 250px;
+	background: white;
+	transition: ease-in-out .3s;
+}
+nav button.navOpen div {
+	width: 100%;
+	margin: 0;
+	transition: ease-in-out .3s;
+}
+nav button.navOpen div:nth-child(1), nav button.navOpen div:nth-child(4) {
+	background: transparent;
+}
+nav button.navOpen div:nth-child(2) {
+	transform: rotate(45deg);
+}
+nav button.navOpen div:nth-child(3) {
+	margin: -5px 0 0 0;
+	transform: rotate(-45deg);
+}
+nav ul#listMenu {
+	position: fixed;
+	background: #0000FF;
+	width: 250px;
+	top: 0;
+	bottom: 0;
+	left: -250px;
+	overflow: auto;
+	box-shadow: 0 0 10px 0px rgba(0,0,0,0);
+	transition: ease-in-out .3s;
+}
+nav ul#listMenu.listOpen {
+	left: 0px;
+	box-shadow: 0 0 10px 0px rgba(0,0,0,.5);
+	transition: ease-in-out .3s;		
+}
+nav ul#listMenu li {
+	width: 100%;
+	padding: 0 20px;
+	float: left;
+	box-sizing: border-box;
+	list-style-type: none;
+
+}
+
+nav ul#listMenu li a {
+	width: 100%;
+	color: #fff;
+	padding: 20px 10px 10px 10px;
+	border-bottom: 1px solid #fff;
+	float: left;
+	box-sizing: border-box;
+}
+nav ul#listMenu li:last-child a {
+	border: none;
+}

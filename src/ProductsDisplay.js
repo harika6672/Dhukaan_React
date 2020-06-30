@@ -1,8 +1,9 @@
 import React from 'react';
 import { productsReducer } from './Reducers/reducer';
 
+
 const products={
-    "margin-bottom":"20px"
+    "marginBottom":"20px"
 } 
 const ProductsDisplay=(props)=>{
     const {product}=props;
@@ -11,7 +12,7 @@ const ProductsDisplay=(props)=>{
         <div className="col-12 col-md-4" key={product.product_id} style={products}>
             <div className="card">
                 <a className="img-card" href="#">
-                <img src="" alt="img"/>
+                <img src={`http://localhost/DhukaanPHP/images/${product.product_image}`} alt="img"/>
                 </a>
                 <br />
                 <div className="card-content">

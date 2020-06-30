@@ -3,9 +3,9 @@ import { bindActionCreators } from 'redux';
 import ShoppingNavigation from './ShoppingNavigation';
 import './products.css';
 
-import fetchProductsAction from '../src/Actions/fetchProducts';
-import {fetchSelectedProductsAction, fetchLikedProductsAction} from '../src/Actions/fetchProducts';
-import {getProductsError, getProducts, getProductsPending, getSelectedProducts, getCount, productsReducer, getLoginId} from '../src/Reducers/reducer';
+import fetchProductsAction from './Actions/fetchProducts';
+import {fetchSelectedProductsAction, fetchLikedProductsAction} from './Actions/fetchProducts';
+import {getProductsError, getProducts, getProductsPending, getSelectedProducts, getCount, productsReducer, getLoginId} from './Reducers/reducer';
 import { connect } from 'react-redux';
 import ProductsDisplay from './ProductsDisplay';
 
@@ -41,7 +41,7 @@ ordersPlaced=(id)=>{
     console.log(this.props.login_id)
     const obj={
         ordered_product_id:id,
-        ordered_user_id:this.props.login_id
+        ordered_user_id:localStorage.getItem('loginid')
     }
     axios({
         method: 'post',
@@ -51,7 +51,7 @@ ordersPlaced=(id)=>{
     .then((response)=> {
         //handle success
         console.log(response.data);
-        this.props.fetchSelectedProducts(this.props.login_id)
+        this.props.fetchSelectedProducts(localStorage.getItem('loginid'))
         this.props.fetchCartCount();
         
     })
@@ -81,7 +81,7 @@ ordersPlaced=(id)=>{
 
         const obj={
             wished_product_id:id,
-            wished_user_id:this.props.login_id
+            wished_user_id:localStorage.getItem('loginid')
         }
         axios({
             method: 'post',
@@ -108,7 +108,7 @@ ordersPlaced=(id)=>{
         const {products} = this.props;
         return(
             <div class="col-md-12">
-                 <div class="modal" tabindex="-1" role="dialog"  id="exampleModal">
+                 <div class="modal" tabIndex="-1" role="dialog"  id="exampleModal">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -123,15 +123,16 @@ ordersPlaced=(id)=>{
                         </div>
                     </div>
                 </div>
+                <ShoppingNavigation/>
         
-            <div className="row">
-                <div className="col-md-4 col-12">
-                    <div style={{marginLeft:"16px"}}>
-                        <ShoppingNavigation/>
-                    </div>
-                </div>
-                <div className="col-md-8 col-12">
-                    <div className="container">
+           
+                <div className="container">
+                     <div className="row">
+                
+                    
+                
+                <div className="col-12 col-md-12">
+                   
                         <div className="row">
                         {products.map((product)=>{
                         return(

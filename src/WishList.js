@@ -24,7 +24,7 @@ class Wishlist extends Component{
         //     }
         const obj={
             ordered_product_id:id,
-            ordered_user_id:this.props.login_id
+            ordered_user_id:localStorage.getItem('loginid')
         }
         axios({
             method: 'post',
@@ -42,7 +42,7 @@ class Wishlist extends Component{
             //              break;
             //            }
             //         }
-            this.props.fetchSelectedProductsAction(this.props.login_id)
+            this.props.fetchSelectedProductsAction(localStorage.getItem('loginid'))
             this.props.fetchCartCount();
             axios({
             method: 'delete',
@@ -50,7 +50,7 @@ class Wishlist extends Component{
             data: obj,  
           }).then((res)=>{
               console.log(res);
-              this.props.fetchLikedProductsAction(this.props.login_id);
+              this.props.fetchLikedProductsAction(localStorage.getItem('loginid'));
           }).catch((res)=>{
             console.log(res)
           })
@@ -67,10 +67,10 @@ class Wishlist extends Component{
     render(){
         const {likedProducts}=this.props
         return(
-            <div className="row">
-                <div className="col-md-4 col-12">
-                    <ShoppingNavigation/>
-                </div>
+            
+                <>
+                <ShoppingNavigation/>
+                <div className="row">
                 <div className="col-md-8 col-12">
                         {likedProducts.length === 0?<h1 style={{textAlign:'center'}}>Your Wishlist is Empty </h1>:
                         likedProducts.map((product, index)=>{
@@ -105,6 +105,7 @@ class Wishlist extends Component{
                         </div>
                     
             </div>
+            </>
         )
     }
 }

@@ -8,10 +8,11 @@ class AddProduct extends Component{
         this.state = {
              categories:[],
              product_category_id:'',
-             product_image:'',
+             product_image:null,
              product_name:'',
              price:'',
-             quantity:''
+             quantity:'',
+             image_name:''
         }
     }
     
@@ -32,9 +33,11 @@ class AddProduct extends Component{
         let name=event.target.name;
         let val=event.target.value;
         if(name==="product_image"){
-            val=event.target.files[0].name;
+            val=event.target.files[0];
+
             this.setState({
-                product_image:val
+                product_image:val,
+                image_name:event.target.files[0].name
             },()=>{
                 console.log(this.state.product_image);
             })
@@ -45,20 +48,31 @@ class AddProduct extends Component{
             [name]:val 
             })
         }
+        
     }
 
     addProduct=(event)=>{
        console.log(this.state);
         event.preventDefault();
+        const formData = new FormData();
+        formData.append('product_category_id', this.state.product_category_id);
+        formData.append('product_image',this.state.product_image)
+        formData.append('image_name',this.state.image_name)
+        formData.append('product_name',this.state.product_name)
+        formData.append('price',this.state.price)
+        formData.append('quantity',this.state.quantity)
         axios({
             method: 'post',
-            url: 'http://localhost/DhukaanPHP/product.php',
-            data: this.state,
+            url: 'http://localhost/DhukaanPHP/upload.php',
+            data: formData,
+            // headers:{'content-type': 'multipart/form-data'}
             
         })
         .then((response)=> {
-           
+            
             console.log(response.data);
+            alert("Product Added");
+            
            
         })
         .catch(function (response) {

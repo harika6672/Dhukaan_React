@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { fetchIdAction } from './Actions/action';
 import { bindActionCreators } from 'redux';
-
+import Auth from './Auth'
 
 class Login extends Component{
     
@@ -50,10 +50,12 @@ class Login extends Component{
                this.setState({
                    login_id:i.id
                })
-            this.props.fetchIdAction(i.id);
+               localStorage.setItem('loginid',this.state.login_id)
+            this.props.fetchIdAction(localStorage.getItem('loginid'));
               this.setState({
                   login:true,
              })
+            
              
             break;
            }
@@ -65,14 +67,11 @@ class Login extends Component{
            }
         }
       })
+      Auth.authenticate();
     }
     render(){
         if(this.state.login){
             return <Redirect to="/shopping-home"/>
-            // return <Redirect to={{
-            //     pathname: '/shopping-home',
-            //     state: { login_id: this.state.login_id}
-            // }} />
         }
         
         return(

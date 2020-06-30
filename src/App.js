@@ -11,7 +11,8 @@ import ShoppingHome from './ShoppingHome';
 import AddCategory from './Admin/AddCategory';
 import AddProduct from './Admin/AddProduct';
 import Staples from './staples';
-
+import Auth from './Auth';
+import { Redirect } from 'react-router-dom';
 
 import {
   BrowserRouter as Router,
@@ -35,17 +36,14 @@ function App() {
         <Route path="/register">
           <Register/>
         </Route>
-        <Route path="/shopping-home">
-          <ShoppingHome/>
-        </Route>
+        <PrivateRoute path="/shopping-home" component={ShoppingHome}/>
         <Route path="/category">
           <Category/>
         </Route>
         
-        <Route path="/profile/:id">
-          <Profile/>
-        </Route>
-        <Route path="/wishlist/:id" exact render = {props => <WishList {...props}  /> } />
+        <PrivateRoute path="/profile/:id" component={Profile}/>
+         
+        <PrivateRoute path="/wishlist/:id" exact component = {props => <WishList {...props}  /> } />
         <Route path="/logout">
           <Login/>
         </Route>
@@ -56,15 +54,33 @@ function App() {
           <AddProduct/>
         </Route>
         
-        <Route path="/staples/:id" exact render = {props => <Staples {...props}  /> } />
-        <Route path="/orders/:id" exact render={(props)=><Orders {...props}/>}/>
+        <PrivateRoute path="/staples/:id" exact component = {props => <Staples {...props}  /> } />
+        <PrivateRoute path="/orders/:id" exact component={(props)=><Orders {...props}/>}/>
         <Route path="/">
           <Login/>
         </Route>
       </Switch>
     </div>
   </Router>
+  
   );
 }
-
+    
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+    {...rest}
+    render={props =>
+    Auth.getAuth() || Auth.getId() ? (
+    <Component {...props} />
+    ) : (
+    <Redirect
+    to={{
+    pathname: "/"
+    }}
+    />
+    )
+    }
+    />
+    );
+    
 export default App;

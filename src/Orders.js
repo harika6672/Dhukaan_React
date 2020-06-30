@@ -23,7 +23,7 @@ class Orders extends Component{
     deleteorder(id){
         const obj={
             ordered_product_id:id,
-            ordered_user_id:this.props.login_id
+            ordered_user_id:localStorage.getItem('loginid')
         }
         axios({
             method: 'delete',
@@ -31,7 +31,7 @@ class Orders extends Component{
             data: obj,  
           }).then((res)=>{
               console.log(res);
-              this.props.fetchSelectedProductsAction(this.props.login_id);
+              this.props.fetchSelectedProductsAction(localStorage.getItem('loginid'));
           }).catch((res)=>{
             console.log(res)
           })
@@ -46,12 +46,12 @@ class Orders extends Component{
             total=total+Number(selectedProduct.price)*Number(selectedProduct.prod_count);
         }
         return(
+            <>
+            <ShoppingNavigation/>
             <div className="row">
-                <div className="col-md-4 col-12">
-                    <div style={{marginLeft:"16px"}}>
-                        <ShoppingNavigation/>
-                    </div>
-                </div>
+               
+                        
+                  
                 <div className="col-md-8 col-12">
                         <div className="panel panel-info">
                             <div className="panel-heading">
@@ -117,6 +117,7 @@ class Orders extends Component{
                         
 		</div>
     </div>
+    </>
     
                         
         

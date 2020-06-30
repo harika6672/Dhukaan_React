@@ -29,63 +29,137 @@ class ShoppingNavigation extends Component{
           }
         })
         console.log(this.props.login_id);
-        this.props.fetchSelectedProductsAction(this.props.login_id);
+        this.props.fetchSelectedProductsAction(localStorage.getItem('loginid'));
         
     }
+    styling=()=>{
+        var x = document.getElementById("side-menu");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+        
+      
+    }
+    menuToggle=()=>{		
+        if (document.getElementById("navBtn").className == "navOpen") {
+            document.getElementById("navBtn").className = "";
+            document.getElementById("listMenu").className = "";
+            document.getElementById("shadowbox").className = "";
+        } else {
+            document.getElementById("navBtn").className = "navOpen";
+            document.getElementById("listMenu").className = "listOpen";
+            document.getElementById("shadowbox").className = "visible";
+        }
+    }
+   
+    
    
     render(){
         this.props.fetchCartCount();
         const categories=this.state.categories;
         return(
-            <div className="nav-side-menu">
-                <div className="brand">Dhukaan</div>
-                    <i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-                    <div className="menu-list">
-                        <ul id="menu-content" className="menu-content collapse out">
-                            <li>
-                                <Link to="/shopping-home">
-                                    <i className="fa fa-dashboard fa-lg"></i>Home
-                                </Link>
-                            </li>
-                            <li data-toggle="collapse" data-target="#products" className="collapsed">
-                                <a href="#"><i className="fa fa-gift fa-lg"></i>Shop By Category<span className="arrow"></span></a>
-                            </li>
-                            <ul id="products">
-                              {categories.map(function(category,index){
-                                   return(<li key={index}>
-                                   {/* <Link to={category.toLowerCase().replace(/\s/g,'')}>{category}</Link> */}
-                                   <Link to={'/staples/'+`:${category.category_id}`}>{category.category_name}</Link>
-                                   </li>)
-                              })}
-                            </ul>
-                            <li>
-                            <Link to={'/orders/'+`:${this.props.login_id}`}> 
-                                <i className="fa fa-shopping-basket fa-lg"></i>My Orders
-                                <span className='badge badge-warning' id='lblCartCount'>{this.props.cartCount}</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to={'/wishlist/'+`:${this.props.login_id}`}>
+            <>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+                        <div className="col-md-12" >
+                        <div className="row">
+                            <div className="navbar-header" id="header1">
+                                <a className="navbar-brand" href="#">Dhukaan</a>
+                            </div>
+                            <div className="col-9 offset-3  col-sm-9 offset-sm-3 col-md-5 offset-md-6">
+                                <div className="float-right">
+                                    <ul id="header-list">
+                                        <li className="active"><a className="col-1 col-sm-1 col-md-1" href="#">Home</a></li>
+                                        <li>
+                                            <Link to={'/orders/'+`:${localStorage.getItem('loginid')}`} className="col-1 col-sm-1 col-md-1"> 
+                                                <i className="fa fa-shopping-basket fa-lg"></i>
+                                                <span className='badge badge-warning' id='lblCartCount'>{this.props.cartCount}</span>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <a href="#" className="col-1 col-sm-1 col-md-1">
+                                            <i className="fa fa-search" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+                                    
+                                        <li className="dropdown" className="col-4 col-sm-4 col-md-2">
+                                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Me
+                                            </button>
+                                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                {/* <a className="dropdown-item" href="#">Profile</a>
+                                                <a className="dropdown-item" href="#">Wishlist</a>
+                                                <a className="dropdown-item" href="#">LogOut</a> */}
+                                                 <li className="dropdown-item">
+                                <Link to={'/wishlist/'+`:${localStorage.getItem('loginid')}`}>
                                 <i className="fa fa-heart-o fa-lg"></i>Wish List
                                 </Link>
                             </li>
-                            <li>
-                            <Link to={'/profile/'+`:${this.props.login_id}`}>
+                            <li className="dropdown-item">
+                            <Link to={'/profile/'+`:${localStorage.getItem('loginid')}`}>
                                 <i className="fa fa-user-circle fa-lg"></i>Profile
                                 </Link>
                             </li>
                            
-                            <li>
-                                <Link to="/logout">
+                            <li  className="dropdown-item">
+                                <Link to="/logout" onClick={()=>localStorage.removeItem('loginid')}>
                                 <i className="fa fa-sign-out fa-lg"></i>LogOut
                                 </Link>
                             </li>
-                        </ul>
+                                            </div>
+                                        </li>
+                                    </ul> 
+                                </div>
+                            </div>
+                        </div>
                     </div>
-            </div>
+                </nav>
+                <div id="side-menu">
+                    <nav className="navbar navbar-expand-lg navbar-dark bg-light" id="sidemenu">
+                            <div className="col-md-12" >
+                            <div className="row">
+                                <div className="col d-flex justify-content-center">
+                                        <ul id="products_list">
+                                            {categories.map(function(category,index){
+                                                return(<li key={index} className="col-1 col-sm-1 col-md-1">
+                                                    <Link to={'/staples/'+`:${category.category_id}`}>{category.category_name}</Link>
+                                                </li>)
+                                            })}
+                                        </ul> 
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div id="side-menu-mobile">
+                <span id="shadowbox" className="abc" onClick={this.menuToggle}></span>
+                <nav>
+                    <button id="navBtn" className="abc" onClick={this.menuToggle}>
+                    <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                    </button>
+                    <ul id="listMenu" className="abc">
+                    {categories.map(function(category,index){
+                        return(<li key={index}>
+                            <Link to={'/staples/'+`:${category.category_id}`}  onClick={()=>{document.getElementById("navBtn").className = ""
+            document.getElementById("listMenu").className ="";
+            document.getElementById("shadowbox").className = ""}}>{category.category_name}</Link>
+                        </li>)
+                        })}
+                    </ul>
+                </nav>
+                </div>
+            </>
         )
     }
+
 }
+
+
+
 const mapStateToProps=(state)=>({
     cartCount:getCount(state),
     login_id:getLoginId(state)

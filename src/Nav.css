@@ -1,0 +1,23 @@
+.nav-link{
+    color:white !important;
+    text-align:center
+}
+li.nav-item:hover{
+    background-color: white !important ;
+    border-radius: 5px;
+    color:black !important;
+}
+.nav-link:hover{
+    color:black !important;
+    
+}
+.active nav-link{
+    background-color: white !important ;
+    border-radius: 5px;
+    color: black !important;
+}
+.active li{
+    background-color: white !important ;
+    border-radius: 5px;
+    color:black !important
+}
