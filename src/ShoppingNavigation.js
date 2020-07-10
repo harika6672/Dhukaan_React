@@ -19,6 +19,7 @@ class ShoppingNavigation extends Component{
     
 
     componentDidMount(){
+        
         axios.get('http://localhost/DhukaanPHP/get_category.php')
         .then(res => {
           const categories_data = res.data;
@@ -70,7 +71,8 @@ class ShoppingNavigation extends Component{
                             <div className="col-9 offset-3  col-sm-9 offset-sm-3 col-md-5 offset-md-6">
                                 <div className="float-right">
                                     <ul id="header-list">
-                                        <li className="active"><a className="col-1 col-sm-1 col-md-1" href="#">Home</a></li>
+                                        {this.props.login_id==0?
+                                        <li className="active"> <Link to={'/login/'}>Login</Link></li>:""}
                                         <li>
                                             <Link to={'/orders/'+`:${localStorage.getItem('loginid')}`} className="col-1 col-sm-1 col-md-1"> 
                                                 <i className="fa fa-shopping-basket fa-lg"></i>

@@ -22,7 +22,7 @@ console.log(id);
       
       axios.get(`http://localhost/DhukaanPHP/get_orders.php/${id}`)
       .then(res => {  
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(fetchSelectedProducts(res))
         return res;
     })
@@ -53,7 +53,7 @@ export function fetchProductsAll(){
     axios.get('http://localhost/DhukaanPHP/getproducts.php')
     
     .then(res => {  
-      console.log(res);
+      // console.log(res);
         dispatch(fetchProductsSuccess(res));
         return res;
     })

@@ -76,7 +76,7 @@ export function productsReducer(state = initialState, action) {
 }
 
 export const getProducts = state => {
-  console.log(state.products)
+  // console.log(state.products)
   return state.products;
 }
 export const getProductsPending = state => state.pending;

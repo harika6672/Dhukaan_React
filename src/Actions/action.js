@@ -14,7 +14,7 @@ export function fetchProductsPending() {
 }
 
 export function fetchProductsSuccess(products) {
-   console.log(products.data)
+//    console.log(products.data)
     return {
         type: FETCH_PRODUCTS_SUCCESS,
         products: products.data

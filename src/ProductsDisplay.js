@@ -7,7 +7,7 @@ const products={
 } 
 const ProductsDisplay=(props)=>{
     const {product}=props;
-    console.log(product);
+    // console.log(product);
     return(
         <div className="col-12 col-md-4" key={product.product_id} style={products}>
             <div className="card">
@@ -28,7 +28,7 @@ const ProductsDisplay=(props)=>{
                 </div>
                 <div className="card-read-more">
                     
-                    <a className="btn btn-link" onClick={()=>props.ordersPlaced(product.product_id)}  data-toggle="modal" data-target="#exampleModal">
+                    <a className="btn btn-link" onClick={()=>props.ordersPlaced(product.product_id)}  data-toggle="modal" data-target= {props.id !== 0 ?"#exampleModal":""}>
                     Order Now
                     </a>
                     

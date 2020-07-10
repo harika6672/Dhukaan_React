@@ -4,6 +4,8 @@ import quote3 from './quote3.jpg';
 import quote2 from './quote2.jpg';
 import quote1 from './quote1.jpg';
 import './ShoppingHome.css';
+import $ from 'jquery';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProductsAll,fetchSelectedProductsAction} from './Actions/fetchProducts';
 import { fetchLikedProducts, fetchCartCount } from './Actions/action'
@@ -13,6 +15,7 @@ import ProductsDisplay from './ProductsDisplay';
 import axios from 'axios';
 
 
+
 class ShoppingHome extends Component{
     constructor(props) {
         super(props)
@@ -20,14 +23,13 @@ class ShoppingHome extends Component{
         this.state = {
              wishListStatus:{},
              items:this.props.products,
-             searchTerm:''
+             searchTerm:'',
+             id:null
         }
         
     }
     componentDidMount(){
-      
         this.props.fetchProductsAll();
-        
     }
     componentDidUpdate(prevProps){
         if(prevProps.products!==this.props.products){
@@ -37,6 +39,11 @@ class ShoppingHome extends Component{
         }
     }
     ordersPlaced=(id)=>{
+        this.setState({
+            id:this.props.login_id
+        })
+        if(this.props.login_id !== 0){
+       
         console.log(this.props.login_id)
         const obj={
             ordered_product_id:id,
@@ -58,7 +65,7 @@ class ShoppingHome extends Component{
             //handle error 
             console.log(response)
         })
-
+    }
     }
        
     searchProduct=(e)=>{
@@ -121,22 +128,31 @@ class ShoppingHome extends Component{
     
     
     render(){
+        if(this.state.id == 0){
+            
+            let s=document.getElementsByClassName("modal-backdrop show");
+            s[0].removeAttribute("class");
+             alert("Please Login")
+            
+            return <Redirect to="/login"/>
+        }
         const {products} = this.props;
 
         return(
            
                 
     <>
-                   <div class="modal" tabIndex="-1" role="dialog"  id="exampleModal">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Dhukaan</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    
+                   <div className="modal" tabIndex="-1" role="dialog"  id="exampleModal">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Dhukaan</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
+                            <div className="modal-body">
                                 <p>Item Added to the Cart</p>
                             </div>
                         </div>
@@ -147,7 +163,7 @@ class ShoppingHome extends Component{
                         <div className="row">
                         {this.state.items.map((product, index)=>{
                             return(
-                                <ProductsDisplay key={index} product={product} status={this.state.wishListStatus} wishList={this.wishList} ordersPlaced={this.ordersPlaced}/>                       
+                                <ProductsDisplay key={index} product={product} id={this.state.id} status={this.state.wishListStatus} wishList={this.wishList} ordersPlaced={this.ordersPlaced}/>                       
                              )}
                             
 

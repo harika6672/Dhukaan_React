@@ -36,7 +36,7 @@ function App() {
         <Route path="/register">
           <Register/>
         </Route>
-        <PrivateRoute path="/shopping-home" component={ShoppingHome}/>
+        <Route path="/shopping-home" component={ShoppingHome}/>
         <Route path="/category">
           <Category/>
         </Route>
@@ -57,7 +57,7 @@ function App() {
         <PrivateRoute path="/staples/:id" exact component = {props => <Staples {...props}  /> } />
         <PrivateRoute path="/orders/:id" exact component={(props)=><Orders {...props}/>}/>
         <Route path="/">
-          <Login/>
+          <ShoppingHome/>
         </Route>
       </Switch>
     </div>
@@ -73,12 +73,15 @@ function App() {
     Auth.getAuth() || Auth.getId() ? (
     <Component {...props} />
     ) : (
+     
     <Redirect
     to={{
     pathname: "/"
     }}
     />
     )
+    
+  
     }
     />
     );
